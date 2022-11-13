@@ -17,3 +17,14 @@ install
 
 `yarn add jest jest-dom jest-mock babel-jest typescript -D`
 `yarn add @testing-library/dom @testing-library/jest-dom @testing-library/react -D`
+
+
+## Next Environment Variables 
+
+- https://nextjs.org/docs/basic-features/environment-variables
+
+
+## Stripe
+
+- A Payment API 
+- https://stripe.com/docs/api/customers
