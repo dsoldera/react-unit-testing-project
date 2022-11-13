@@ -14,3 +14,6 @@ install
 - babel-jest
 
 `yarn add jest jest-dom @testing-library/jest-dom @testing-library/dom @testing-library/react babel-jest -D`
+
+`yarn add jest jest-dom jest-mock babel-jest typescript -D`
+`yarn add @testing-library/dom @testing-library/jest-dom @testing-library/react -D`
