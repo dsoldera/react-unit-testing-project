@@ -46,7 +46,7 @@ export default function Home({ product}: HomeProps) {
 // vai salvar a pagina/ o resultado do HTML para uma futura busca
 // e posso definir o tempo para revalidar o conteudo buscando novamento o serviço
 export const getStaticProps: GetStaticProps = async() => {
-  console.log('show only inside the next or backend');
+  console.log('showed only inside the next or backend log');
 
   // essa key é relativa ao preço do produto dentro do stripe
   const price = await stripe.prices.retrieve('price_1M3hFHFChlw97LJEcpZ2UILx')
