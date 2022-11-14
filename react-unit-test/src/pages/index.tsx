@@ -49,7 +49,7 @@ export const getStaticProps: GetStaticProps = async() => {
   console.log('showed only inside the next or backend log');
 
   // essa key é relativa ao preço do produto dentro do stripe
-  const price = await stripe.prices.retrieve('price_1M3hFHFChlw97LJEcpZ2UILx')
+  const price = await stripe.prices.retrieve('price_1M3hFHFChlw97LJEcpZ2UILx');
 
   const product = {
     priceId: price.id,
