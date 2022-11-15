@@ -1,10 +1,18 @@
-import Prismic from '@prismicio/client';
+import * as prismic from '@prismicio/client';
 
-export function getPrismicClient(req?: unknown) {
-  const prismic = Prismic.client(process.env.PRISMIC_ENDPOINT!, {
-    req,
-    
-    accessToken: process.env.PRISMIC_ACCESS_TOKEN
+export async function getPrismicClient() {
+  const repoName = 'rocketseat-ignews-nextjs';
+  const endpoint = prismic.getEndpoint(repoName);
+  const client = prismic.createClient(endpoint, {
+    accessToken:  process.env.PRISMIC_ACCESS_TOKEN
   });
-  return prismic;
+  const posts = await client.getAllByType('posts', {
+    orderings: {
+      field: 'document.first_publication_date',
+      direction: 'desc',
+    },
+  });
+
+  //console.log(posts);
+  return posts;
 }

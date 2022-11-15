@@ -1,10 +1,7 @@
 import Head from 'next/head';
 import { GetStaticProps } from 'next';
-import Link from 'next/link';
-
-import Prismic from '@prismicio/client';
-import { RichText } from 'prismic-dom';
 import { getPrismicClient } from '../../services/prismic';
+import Link from 'next/link';
 
 import styles from './styles.module.scss';
 
@@ -23,13 +20,15 @@ export default function Posts({ posts }: PostProps) {
 
       <main className={styles.container}>
         <div className={styles.posts}>
-          {/* {posts.map(post => (
-            <Link href={`/posts/${post.slug}`} key={post.slug}>
-              <time>{post.updatedAt}</time>
-              <strong>{post.title}</strong>
-              <p>{post.excerpt}</p>
-            </Link>
-          ))} */}
+          {posts.map(post => {
+            return (
+              <Link href={post.slug} key={post.slug}>
+                <time>{post.updatedAt}</time>
+                <strong>{post.title}</strong>
+                <p>{post.excerpt}</p>
+              </Link>
+            )
+          })}
         </div>
       </main>
     </>
@@ -37,26 +36,19 @@ export default function Posts({ posts }: PostProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const prismic = getPrismicClient();
-
-  const response = await prismic.query<any>(
-    [Prismic.predicates.at('document.type', 'posts')],
-    {
-      fetch: ['posts.title', 'posts.content'],
-      pageSize: 100
-    }
-  );
-
+  const response = await getPrismicClient();
+  
   //console.log(JSON.stringify(response, null, 2));
 
-  const posts = response.results.map(post => {
+  const posts:any = response.map(post => {
     return {
       slug: post.uid,
-      title: RichText.asText(post.data.title),
+      title: post.data.title[0].text,
+      content: post.data.content,
       excerpt:
         post.data.content.find(content => content.type === 'paragraph')?.text ??
         '',
-      updatedAt: new Date(posts.last_publication_date).toLocaleDateString(
+      updatedAt: new Date(post.last_publication_date).toLocaleDateString(
         'pt-BR',
         {
           day: '2-digit',
@@ -66,8 +58,11 @@ export const getStaticProps: GetStaticProps = async () => {
       )
     };
   });
+  //console.log('posts', JSON.stringify(posts, null, 2));
 
   return {
-    props: { posts }
+    props: { 
+      posts
+    }
   };
 };
