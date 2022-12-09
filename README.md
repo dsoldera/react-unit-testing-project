@@ -28,3 +28,22 @@ install
 
 - A Payment API 
 - https://stripe.com/docs/api/customers
+
+
+## Authentication
+
+- Using Next Auth
+- https://next-auth.js.org/getting-started/introduction
+
+
+## Faunadb
+
+- Database vamos utilizar Faunadb que funciona em ambiente serverless
+- dentro do front-end, pode ser o firebase ou supabase tb
+- https://dashboard.fauna.com/
+- https://docs.fauna.com/fauna/current/learn/introduction/
+- https://docs.fauna.com/fauna/current/api/fql/cheat_sheet
+
+## CMS for Frontend
+- https://prismic.io/
+- https://dsoldera-ignews.prismic.io
